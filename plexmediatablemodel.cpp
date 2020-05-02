@@ -62,6 +62,8 @@ QVariant PlexMediaTableModel::data(const QModelIndex &index, int role) const
                 return QVariant::fromValue(QColor(0,125,255));
             case year:
                 return QVariant::fromValue(QColor(0,113,230));
+            case summary:
+            return QVariant::fromValue(QColor(230,113,0));
         }
     }
 

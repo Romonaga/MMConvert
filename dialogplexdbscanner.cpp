@@ -8,6 +8,7 @@
 #include <QMap>
 #include <QVariant>
 #include <QFile>
+#include <QSortFilterProxyModel>
 
 DialogPlexDBScanner::DialogPlexDBScanner(QWidget *parent) :
     QDialog(parent),
@@ -17,6 +18,8 @@ DialogPlexDBScanner::DialogPlexDBScanner(QWidget *parent) :
 
     ui->tvPlex->viewport()->installEventFilter(this);
     ui->tvPlex->setMouseTracking(true);
+
+
     _popup = new QDialog(this, Qt::Popup | Qt::ToolTip);
 
    QVBoxLayout *layout = new QVBoxLayout;
@@ -34,8 +37,13 @@ DialogPlexDBScanner::DialogPlexDBScanner(QWidget *parent) :
     if(db.open())
     {
         _plexModel = new PlexMediaTableModel(this, db);
-        ui->tvPlex->setModel(_plexModel);
+        QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel();
+        proxyModel->setSourceModel(_plexModel);
+        ui->tvPlex->setModel(proxyModel);
+
+        //ui->tvPlex->setModel(_plexModel);
         _plexModel->select();
+
 
         //set visibal rows / set column Styles
         for (int counter = 0; counter < _plexModel->columnCount(); counter++)
@@ -44,6 +52,7 @@ DialogPlexDBScanner::DialogPlexDBScanner(QWidget *parent) :
 
 
         }
+
 
 
 
