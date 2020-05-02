@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../storage/RomoShare/Movies/icons8-film-reel-48.png</normaloff>../../../../storage/RomoShare/Movies/icons8-film-reel-48.png</iconset>
+    <normaloff>art/icons8-film-reel-48.png</normaloff>art/icons8-film-reel-48.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">

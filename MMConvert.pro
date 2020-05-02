@@ -6,6 +6,7 @@
 
 QT       += core gui sql
 
+#QMAKE_CXXFLAGS += j8
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimediawidgets
 
 TARGET = MMConvert
