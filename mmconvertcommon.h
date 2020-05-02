@@ -1,6 +1,37 @@
 #ifndef MMCONVERTCOMMON_H
 #define MMCONVERTCOMMON_H
 
+
+/*
+#define PRESET_TYPE(X)                                                  \
+            X(0, ultrafast, "ultrafast","Small Files, crap quality"),                           \
+            X(1, superfast, "superfast","Small Files, Better than crap quiality"),                              \
+            X(2, veryfast, "veryfast","Nice small files, yet quality is much better"),                                    \
+            X(3, faster, "faster","Fast is relative, but quaility is much better"),                        \
+            X(4, fast, "fast","Fast seems to be the best between size and quaility"),                          \
+            X(5, medium, "medium","This is the default, about 1.5X encoding speed"),                    \
+            X(6, slow, "slow","Files getting larger, quality gains smaller"),                    \
+            X(7, slower, "slower","Larger files, slower time, quaility gains almost gone"),                   \
+            X(8, veryslow, "veryslow","Very Large files, near lossless, Very Slow, forget about noticing the diff"),               \
+            X(9, placebo, "placebo","I dont even know what to say about this setting")               \
+*/
+
+#define PRESET_TYPE(X)                                                  \
+            X(0, none, "none","No preset is the same as medium."),                          \
+            X(1, fast, "fast","Fast seems to be the best between size and quaility"),                          \
+            X(2, medium, "medium","This is the default, about 1.5X encoding speed"),                    \
+            X(3, slow, "slow","Files getting larger, quality gains smaller")                    \
+
+#define PRESET_TYPE_ENUM(type, name, str, description) name = type
+#define PRESET_TYPE_STRING(type, name, str, description) str
+#define PRESET_TYPE_DESC(type, name, str, description) description
+
+typedef enum {
+    PRESET_TYPE(PRESET_TYPE_ENUM),
+    PRESET_TYPE_ENUM_COUNT
+} PresetType;
+
+
 enum FmtType { None, Bool, String, Duration, ChkBox, CBox, File, Spin};
 
 

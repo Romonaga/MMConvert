@@ -1,4 +1,5 @@
 #include "mmconversioninfo.h"
+#include "mmconvertcommon.h"
 #include <QFileInfo>
 #include <QJsonDocument>
 #include <QJsonArray>

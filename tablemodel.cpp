@@ -288,6 +288,9 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
         if(getHideColumn(section) == false)
             return getColumnName(section);
 
+    if (role == Qt::DisplayRole && orientation == Qt::Vertical)
+        return QSqlTableModel::headerData(section, orientation, role);
+
     return QVariant();
 }
 
