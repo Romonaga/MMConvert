@@ -7,7 +7,7 @@ enum FmtType { None, Bool, String, Duration, ChkBox, CBox, File, Spin};
             //type, name,    dbname, colName, hide, selectable, edit, enable, fmtType
 #define COLUMN_INFO(X)                                                  \
             X( 0, idmmqueue, "idmmqueue", "Queue ID", false, true, false, true, None, false),                          \
-            X( 1, fileName, "fileName", "File", false, false, true, false, None, false),                          \
+            X( 1, fileName, "fileName", "File", false, false, true, false, None, true),                          \
             X( 2, filePath, "filePath", "Path", true, false, true, false, None, false),                          \
             X( 3, outputDir, "outputDir", "Out-Path", false, false, true, true, File, false),                          \
             X( 4, process, "process","Process", false, false, true, true, ChkBox, false),                          \
