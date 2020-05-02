@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>art/icons8-film-reel-48.png</file>
+    </qresource>
+</RCC>

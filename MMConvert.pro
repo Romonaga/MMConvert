@@ -85,3 +85,6 @@ unix {
     target.path = /usr/local/bin
     INSTALLS += target
 }
+
+RESOURCES += \
+    mmconvertresources.qrc

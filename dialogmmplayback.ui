@@ -13,7 +13,13 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="mmconvertresources.qrc">
+    <normaloff>:/art/icons8-film-reel-48.png</normaloff>:/art/icons8-film-reel-48.png</iconset>
+  </property>
  </widget>
- <resources/>
+ <resources>
+  <include location="mmconvertresources.qrc"/>
+ </resources>
  <connections/>
 </ui>

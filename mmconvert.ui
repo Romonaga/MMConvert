@@ -26,8 +26,11 @@
    <string>MMConvert</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>art/icons8-film-reel-48.png</normaloff>art/icons8-film-reel-48.png</iconset>
+   <iconset resource="mmconvertresources.qrc">
+    <normaloff>:/art/icons8-film-reel-48.png</normaloff>:/art/icons8-film-reel-48.png</iconset>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -164,6 +167,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="mmconvertresources.qrc"/>
+ </resources>
  <connections/>
 </ui>

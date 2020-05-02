@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Import Mega</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="mmconvertresources.qrc">
+    <normaloff>:/art/icons8-film-reel-48.png</normaloff>:/art/icons8-film-reel-48.png</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -43,7 +47,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="mmconvertresources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
