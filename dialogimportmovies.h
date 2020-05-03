@@ -18,6 +18,8 @@ public:
 private slots:
     void on_btnSelectFile_clicked();
 
+    void on_btnDloads_clicked();
+
 private:
     Ui::DialogImportMovies *ui;
 };

@@ -56,7 +56,7 @@ void DialogMovieCompare::on_btnRun_clicked()
     if(database.open())
     {
         ui->listResults->clear();
-        QSqlQuery qry = database.exec("select * from mmMegaBoom order by movieName asc");
+        QSqlQuery qry = database.exec("select * from mmMegaBoom where dupe = 0 order by movieName asc");
         while(qry.next())
         {
             movieName =  qry.value(1).toString();
@@ -136,7 +136,9 @@ void DialogMovieCompare::on_btnRun_clicked()
 
         }
 
-        ui->listResults->addItem("Number Missing: " + QString::number(dbList.size()));
+        QIcon icon(":/art/icons8-film-reel-48.png");
+        QListWidgetItem* tot = new QListWidgetItem(icon,"Number Missing: " + QString::number(dbList.size()));
+        ui->listResults->addItem(tot);
 
         foreach(QString fName, dbList.values())
             ui->listResults->addItem(fName);
@@ -230,4 +232,107 @@ void DialogMovieCompare::on_pushButton_clicked()
         }
 
     }
+}
+
+void DialogMovieCompare::on_btnMegaDL_clicked()
+{
+    QMap<QString, QString> dbList;
+    QStringList fsList;
+    QString movieName;
+    QString movieType;
+    QStringList movieNameParts;
+    bool isRip = false;
+
+
+    QFileDialog dirDialog;
+
+    dirDialog.setFileMode(QFileDialog::Directory);
+    dirDialog.setOption(QFileDialog::ShowDirsOnly, true);
+
+
+    QString dirName = dirDialog.getExistingDirectory(this, "Select Directory");
+    QSqlDatabase  database = QSqlDatabase().addDatabase("QMYSQL", "mmMegaDLList");
+    database.setUserName(MMSettings::getInstance()->getUser());
+    database.setPassword(MMSettings::getInstance()->getPwd());
+    database.setDatabaseName(MMSettings::getInstance()->getDataBase());
+    database.setHostName(MMSettings::getInstance()->getServer());
+
+    if(database.open())
+    {
+        ui->listResults->clear();
+        QSqlQuery qry = database.exec("select * from mmMegaDLList order by movieName asc");
+        while(qry.next())
+        {
+            movieName =  qry.value(1).toString();
+            movieName = movieName.left(movieName.indexOf('('));
+            movieName.replace("\"","");
+            movieName.replace("-","");
+            movieName.replace(": ","_");
+            movieName.replace("&","and");
+
+            dbList.insert(movieName.replace(" " ,""), qry.value(1).toString());
+
+
+        }
+
+        database.close();
+        QDirIterator dirWalk(dirName, QDir::NoFilter, QDirIterator::Subdirectories);
+        while(dirWalk.hasNext())
+        {
+            QString nextItr = dirWalk.next();
+            QFileInfo file(nextItr);
+            if(file.exists() && file.isFile())
+            {
+                movieName.clear();
+
+                movieNameParts = file.completeBaseName().split('-', QString::SplitBehavior::SkipEmptyParts);
+                if(movieNameParts.length() >= 3 )
+                {
+                    isRip = (movieNameParts[movieNameParts.length() - 1] == "rip");
+                    if(movieNameParts.length() == 3 )
+                    {
+                        movieName.append(movieNameParts[0]);
+                        //movieName.append("-");
+                    }
+                    else
+                    {
+                        int offset = ((isRip) ? movieNameParts.length() - 1 : 2) ;
+                        for(int counter =  0; counter < (movieNameParts.length() - offset); counter++)
+                        {
+                            movieName.append(movieNameParts[counter]);
+                            //movieName.append("-");
+                        }
+                    }
+
+                    movieName.replace("&","and");
+                    movieName.replace(',',"");
+                    fsList.append(movieName.replace(" " ,""));
+                }
+
+            }
+
+        }
+
+        fsList.sort();
+        int hitCount = 0;
+        foreach(QString fsFile, fsList)
+        {
+            if(dbList.contains(fsFile) == true)
+            {
+                hitCount++;
+                dbList.remove(fsFile);
+            }
+
+        }
+
+        QIcon icon(":/art/icons8-film-reel-48.png");
+        QListWidgetItem* tot = new QListWidgetItem(icon,"Number Missing: " + QString::number(dbList.size()));
+        ui->listResults->addItem(tot);
+
+        foreach(QString fName, dbList.values())
+            ui->listResults->addItem(fName);
+
+    }
+
+
 }

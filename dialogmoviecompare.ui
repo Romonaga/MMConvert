@@ -18,6 +18,16 @@
     <normaloff>:/art/icons8-film-reel-48.png</normaloff>:/art/icons8-film-reel-48.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QListWidget" name="listResults"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="btnRun">
+     <property name="text">
+      <string>Mega History</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="1">
     <widget class="QPushButton" name="btnMega">
      <property name="text">
@@ -25,13 +35,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QListWidget" name="listResults"/>
-   </item>
-   <item row="1" column="0">
-    <widget class="QPushButton" name="btnRun">
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btnMegaDL">
      <property name="text">
-      <string>Mega</string>
+      <string>Mega DL List</string>
      </property>
     </widget>
    </item>
