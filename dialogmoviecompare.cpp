@@ -267,6 +267,7 @@ void DialogMovieCompare::on_btnMegaDL_clicked()
             movieName = movieName.left(movieName.indexOf('('));
             movieName.replace("\"","");
             movieName.replace("-","");
+            movieName.replace(",","");
             movieName.replace(": ","_");
             movieName.replace("&","and");
 

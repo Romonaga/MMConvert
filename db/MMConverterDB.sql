@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `MMConverter` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `MMConverter`;
 -- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: MMConverter
@@ -30,8 +28,23 @@ CREATE TABLE `mmMegaBoom` (
   `movieType` varchar(45) DEFAULT NULL,
   `purchaseAmount` varchar(45) DEFAULT NULL,
   `purchaseType` varchar(45) DEFAULT NULL,
+  `dupe` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `mmMegaDLList`
+--
+
+DROP TABLE IF EXISTS `mmMegaDLList`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mmMegaDLList` (
+  `ID` int(11) NOT NULL,
+  `movieName` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -69,7 +82,7 @@ CREATE TABLE `mmqueue` (
   `startFileSize` bigint(20) DEFAULT NULL,
   `endFileSize` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`idmmqueue`)
-) ENGINE=InnoDB AUTO_INCREMENT=278 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -81,4 +94,4 @@ CREATE TABLE `mmqueue` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-02  6:35:33
+-- Dump completed on 2020-05-03  8:06:47
