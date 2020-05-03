@@ -40,6 +40,7 @@ void DialogMovieCompare::on_btnRun_clicked()
     bool isRip = false;
 
 
+    this->setWindowTitle("MegaBoon History - Files");
     QFileDialog dirDialog;
 
     dirDialog.setFileMode(QFileDialog::Directory);
@@ -154,6 +155,7 @@ void DialogMovieCompare::on_btnMega_clicked()
     QString dir;
     QFileDialog fileDialog;
 
+    this->setWindowTitle("Plex Media - Files");
     fileDialog.setFileMode(QFileDialog::Directory);
     fileDialog.setOption(QFileDialog::ShowDirsOnly, true);
 
@@ -243,6 +245,7 @@ void DialogMovieCompare::on_btnMegaDL_clicked()
     QStringList movieNameParts;
     bool isRip = false;
 
+    this->setWindowTitle("MegaBoon DL List - Files");
 
     QFileDialog dirDialog;
 
