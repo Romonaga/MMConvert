@@ -440,12 +440,6 @@ void MMConvert::on_tvDB_customContextMenuRequested(const QPoint &pos)
     //    QModelIndex index = ui->tvDB->indexAt(pos);
 
     QMenu *menu = new QMenu(this);
-    QAction* probe = new QAction("Probe", this);
-    connect(probe, SIGNAL(triggered(bool)), SLOT(probeFile()));
-
-    QAction* play = new QAction("Play", this);
-    connect(play, SIGNAL(triggered(bool)), SLOT(playFile()));
-
 
     QAction* process = new QAction("Mark For Process", this);
     connect(process, SIGNAL(triggered(bool)), SLOT(markProcess()));
@@ -456,9 +450,6 @@ void MMConvert::on_tvDB_customContextMenuRequested(const QPoint &pos)
     QAction* custom = new QAction("Use Custom Settings", this);
     connect(custom, SIGNAL(triggered(bool)), SLOT(markUseCustom()));
 
-    //menu->addAction(probe);
-    menu->addAction(play);
-    menu->addSeparator();
     menu->addAction(process);
     menu->addAction(custom);
     menu->addSeparator();
