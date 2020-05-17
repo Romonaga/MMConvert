@@ -115,11 +115,14 @@ void DialogImportMovies::on_btnDloads_clicked()
                     sql.str("");
                     QString movieNum = movie.left(movie.indexOf('.'));
                     QString movieName = movie.right(movie.length() - movie.indexOf('.') - 1).trimmed();
+                    movieName.replace('\'',"\'\'");
                     sql << "insert into mmMegaDLList(ID, movieName) values(" <<
                            movieNum.toStdString().c_str()  << ",'" <<
                            movieName.toStdString().c_str() << "')";
 
                     result = database.exec(sql.str().c_str());
+
+                    qDebug() << result.lastError().text();
 
                 }
 
