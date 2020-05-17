@@ -44,6 +44,8 @@ void DialogMMSettings::on_btnSave_clicked()
     MMSettings::getInstance()->setPreset(ui->cboxPreset->currentText());
 
     MMSettings::getInstance()->saveSettings();
+
+    this->setResult(QDialog::Accepted);
     this->close();
 }
 
@@ -92,5 +94,18 @@ void DialogMMSettings::on_btnDirToMonitor_clicked()
     fileDialog->setOption(QFileDialog::ShowDirsOnly, true);
     MMSettings::getInstance()->setDirToMonitor(fileDialog->getExistingDirectory(this));
     ui->btnDirToMonitor->setText(MMSettings::getInstance()->getDirToMonitor());
+
+}
+
+void DialogMMSettings::on_buttonBox_accepted()
+{
+    MMSettings::getInstance()->setServer(ui->txtServer->text());
+    MMSettings::getInstance()->setDataBase(ui->txtDataBase->text());
+    MMSettings::getInstance()->setUser(ui->txtUser->text());
+    MMSettings::getInstance()->setPwd(ui->txtPwd->text());
+    MMSettings::getInstance()->setPreset(ui->cboxPreset->currentText());
+
+    MMSettings::getInstance()->saveSettings();
+    this->close();
 
 }

@@ -47,8 +47,6 @@ private slots:
     void on_actionLoad_MegaBoom_triggered();
     void on_actionCompare_triggered();
     void on_actionMM_Settings_triggered();
-    void probeFile();
-    void playFile();
     void markProcess();
     void markDel();
     void markUseCustom();
@@ -91,6 +89,7 @@ protected:
     // QObject interface
 public:
     bool eventFilter(QObject *watched, QEvent *event);
+    void startDirWatch();
 };
 
 

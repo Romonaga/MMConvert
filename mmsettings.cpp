@@ -114,6 +114,7 @@ bool MMSettings::saveSettings()
     settings.setValue("AutoProcessDir", _autoProcessDir);
     settings.setValue("DirToMonitor", _dirToMonitor);
     settings.endGroup();
+
     return true;
 
 }

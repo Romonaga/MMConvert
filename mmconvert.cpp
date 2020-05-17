@@ -23,8 +23,9 @@
 
 #include "mmsettings.h"
 #include "dialogmmsettings.h"
-#include "dialogdeepprobe.h"
 #include "dialogplexdbscanner.h"
+
+
 
 
 
@@ -33,6 +34,7 @@ MMConvert::MMConvert(QWidget *parent) :
     ui(new Ui::MMConvert)
 {
     _convertRunning = false;
+    _dirWatcher = nullptr;
 
     ui->setupUi(this);
     setAcceptDrops(true);
@@ -45,10 +47,7 @@ MMConvert::MMConvert(QWidget *parent) :
     connect(_ffMpegInvoker, SIGNAL(processUpdate(QString, MMConversionInfo*)), this, SLOT(threadProcessUpdate(QString, MMConversionInfo*)),Qt::QueuedConnection);
     connect(_ffMpegInvoker, SIGNAL(processComplete(MMConversionInfo*)), this, SLOT(processComplete(MMConversionInfo*)),Qt::QueuedConnection);
 
-    _dirWatcher = new MMDirWatcher(MMSettings::getInstance()->getDirToMonitor(), this);
-    connect(_dirWatcher, SIGNAL(fileChangeNotice(QString, MMDirWatcher::FileStatus, quint64)), this, SLOT(changeNotice(QString, MMDirWatcher::FileStatus, quint64)),Qt::QueuedConnection);
-    //connect(_dirWatcher, SIGNAL(fileChangeNotice(QString,FileStatus,quint64)), this, SLOT(changeNotice(QString,MMDirWatcher::FileStatus,quint64)), Qt::QueuedConnection);
-    _dirWatcher->start();
+    startDirWatch();
 
     QSqlDatabase  database = QSqlDatabase().addDatabase("QMYSQL","mmqueue");
     database.setUserName(MMSettings::getInstance()->getUser());
@@ -120,6 +119,12 @@ MMConvert::MMConvert(QWidget *parent) :
 
 }
 
+void MMConvert::startDirWatch()
+{
+    _dirWatcher = new MMDirWatcher(MMSettings::getInstance()->getDirToMonitor(), this);
+    connect(_dirWatcher, SIGNAL(fileChangeNotice(QString, MMDirWatcher::FileStatus, quint64)), this, SLOT(changeNotice(QString, MMDirWatcher::FileStatus, quint64)),Qt::QueuedConnection);
+    _dirWatcher->start();
+}
 
 void MMConvert::changeNotice(QString fileName, MMDirWatcher::FileStatus stat, quint64 lastSize)
 {
@@ -152,7 +157,7 @@ void MMConvert::changeNotice(QString fileName, MMDirWatcher::FileStatus stat, qu
         processSelected();
     }
 }
-//10.2.0.25
+
 
 MMConvert::~MMConvert()
 {
@@ -418,6 +423,7 @@ void MMConvert::on_actionMM_Settings_triggered()
 {
     DialogMMSettings settings;
     settings.exec();
+
 }
 
 void MMConvert::on_actionPlex_DB_Scan_triggered()
@@ -461,44 +467,7 @@ void MMConvert::on_tvDB_customContextMenuRequested(const QPoint &pos)
     menu->popup(ui->tvDB->viewport()->mapToGlobal(pos));
 }
 
-void MMConvert::playFile()
-{
-    int row = ui->tvDB->selectionModel()->currentIndex().row();
-    if(row >= 0)
-    {
-        QString fName =  _mmConvertModel->record(row).value(fileName).toString();
-        QString fPath =  _mmConvertModel->record(row).value(filePath).toString();
-        MMConversionInfo mmInfo;
-        mmInfo.setFileName(fName);
-        mmInfo.setfilePath(fPath);
 
-        _playlist->clear();
-        _playlist->addMedia(QUrl::fromLocalFile(mmInfo.inFullFileName()));
-
-        _videoWidget->show();
-        _player->play();
-
-    }
-}
-
-void MMConvert::probeFile()
-{
-    int row = ui->tvDB->selectionModel()->currentIndex().row();
-    if(row >= 0)
-    {
-
-        QString fName =  _mmConvertModel->record(row).value(fileName).toString();
-        QString fPath =  _mmConvertModel->record(row).value(filePath).toString();
-
-        MMConversionInfo mmInfo;
-        mmInfo.setFileName(fName);
-        mmInfo.setfilePath(fPath);
-
-        DialogDeepProbe deepProbe(&mmInfo);
-        deepProbe.exec();
-
-    }
-}
 
 
 void MMConvert::markProcess()

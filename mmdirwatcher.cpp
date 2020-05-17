@@ -24,8 +24,9 @@ MMDirWatcher::~MMDirWatcher()
 
 void MMDirWatcher::stop()
 {
-   _running = false;
+    _running = false;
 }
+
 
 void MMDirWatcher::fileChanged(QString fileName)
 {
@@ -45,12 +46,13 @@ void MMDirWatcher::fileChanged(QString fileName)
 
 void MMDirWatcher::run()
 {
+
+    QStringList list;
+    list << "*.mkv" << "*.avi" << "*.mov" << "*mp4";// << "*.txt";
+
     _running = true;
     while(_running)
     {
-        QStringList list;
-        list << "*.mkv" << "*.avi" << "*.mov" << "*mp4";// << "*.txt";
-
         QDirIterator dirWalk(_path, list, QDir::Files | QDir::Readable, QDirIterator::NoIteratorFlags);
 
         while(dirWalk.hasNext())
@@ -82,20 +84,5 @@ void MMDirWatcher::run()
     }
 }
 
-/*
- *                 else
-                {
-                    quint64 lm = file.size();
-                    quint64 st = _fileMap.value(file.absoluteFilePath() ) ;
-
-                    if(lm > st )
-                    {
-
-                        _fileMap.value(file.absoluteFilePath(), file.size());
-                      //  emit fileChangeNotice(file.fileName());
-                    }
-                }
-
- * */
 
 

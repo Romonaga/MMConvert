@@ -38,8 +38,6 @@ SOURCES += \
     spinsimpledelegate.cpp \
     mmsettings.cpp \
     dialogmmsettings.cpp \
-    dialogdeepprobe.cpp \
-    dialogmmplayback.cpp \
     mmdirwatcher.cpp \
     plexmediatablemodel.cpp \
     dialogplexdbscanner.cpp
@@ -57,8 +55,6 @@ HEADERS += \
     spinsimpledelegate.h \
     mmsettings.h \
     dialogmmsettings.h \
-    dialogdeepprobe.h \
-    dialogmmplayback.h \
     mmdirwatcher.h \
     plexmediatablemodel.h \
     dialogplexdbscanner.h \
@@ -70,8 +66,6 @@ FORMS += \
     dialogimportmovies.ui \
     dialogmoviecompare.ui \
     dialogmmsettings.ui \
-    dialogdeepprobe.ui \
-    dialogmmplayback.ui \
     dialogplexdbscanner.ui
 
 #libav support

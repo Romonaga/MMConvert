@@ -23,6 +23,7 @@ public:
     ~MMDirWatcher();
     void stop();
 
+
 private:
     QString _path;
     QMap<QString, qint64> _fileMap;
