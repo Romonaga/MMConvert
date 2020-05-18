@@ -342,23 +342,18 @@ void MMConversionInfo::setStreamsMetaInfo(QString streamsInfo)
 }
 
 
-void MMConversionInfo::setFormatMetaInfo(QString streamsInfo)
+void MMConversionInfo::setFormatMetaInfo(QString formatInfo)
 {
 
     QJsonParseError parsError;
-    QJsonDocument jDoc = QJsonDocument::fromJson(streamsInfo.toUtf8(), &parsError);
+    QJsonDocument jDoc = QJsonDocument::fromJson(formatInfo.toUtf8(), &parsError);
 
     QJsonObject jsonObject = jDoc.object();
-    foreach(auto stream, jsonObject.keys())
+    foreach(auto key, jsonObject.keys())
     {
+        QString value =  jsonObject[key].toString();
+        addFmtMeta(key, value);
 
-        QJsonObject metaData = jsonObject[stream].toObject();
-
-        foreach(auto key, metaData.keys())
-        {
-            QString value =  metaData[key].toString();
-            addFmtMeta(key, value);
-        }
     }
 }
 

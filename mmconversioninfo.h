@@ -90,7 +90,7 @@ public:
     QStringList getStreamMetaKeys();
 
     QString getFormatMetaInfo() const;
-    void setFormatMetaInfo(QString streamsInfo);
+    void setFormatMetaInfo(QString formatInfo);
 
     QString getStreamsMetaInfo() const;
     void setStreamsMetaInfo(QString streamsInfo);
