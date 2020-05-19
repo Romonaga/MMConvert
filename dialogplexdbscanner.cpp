@@ -22,15 +22,15 @@ DialogPlexDBScanner::DialogPlexDBScanner(QWidget *parent) :
 
     _popup = new QDialog(this, Qt::Popup | Qt::ToolTip);
 
-   QVBoxLayout *layout = new QVBoxLayout;
    _popupLabel = new QLabel(_popup);
    _popupLabel->setWordWrap(true);
-   layout->addWidget(_popupLabel);
    _popupLabel->setTextFormat(Qt::RichText);
    _popupLabel->setOpenExternalLinks(true);
-   _popup->setLayout(layout);
-   _popup->installEventFilter(this);
 
+   _popup->installEventFilter(this);
+   QVBoxLayout *layout = new QVBoxLayout;
+   layout->addWidget(_popupLabel);
+   _popup->setLayout(layout);
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "scanner");
     db.setDatabaseName("/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.db");
@@ -44,17 +44,9 @@ DialogPlexDBScanner::DialogPlexDBScanner(QWidget *parent) :
         //ui->tvPlex->setModel(_plexModel);
         _plexModel->select();
 
-
         //set visibal rows / set column Styles
         for (int counter = 0; counter < _plexModel->columnCount(); counter++)
-        {
             ui->tvPlex->setColumnHidden(counter, PlexMediaTableModel::getHideColumn(counter));
-
-
-        }
-
-
-
 
     }
 }
@@ -135,9 +127,7 @@ void DialogPlexDBScanner::on_btnCreateNewDirStructure_clicked()
                 return;
             }
             else
-            {
                 ui->listStatus->addItem("Created Dir: " + cDir + ".");
-            }
         }
 
         QMap<QString, QString> plex = _plexModel->getFileGenre();
@@ -157,9 +147,7 @@ void DialogPlexDBScanner::on_btnCreateNewDirStructure_clicked()
                     ui->listStatus->addItem("Went From: " + file + " To: " + newPath + ".");
                 }
                 else
-                {
                     ui->listStatus->addItem("Would Have! Went From: " + file + " To: " + newPath + ".");
-                }
 
             }
 

@@ -434,9 +434,7 @@ void MMConversionInfo::addStreamMeta(const QString &streamName, const QString &k
 {
     QString normKey = key.split('-')[0];
     if(_streamMeta.contains(streamName))
-    {
         _streamMeta[streamName].insert(normKey, value);
-    }
     else
     {
 

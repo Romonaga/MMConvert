@@ -34,9 +34,7 @@ void DialogFindDupes::runDupeCheck()
         if(file.exists() && file.isFile())
         {
             if(dupChecks.contains(file.completeBaseName()))
-            {
                 dupChecks[file.completeBaseName()].append(file.absoluteFilePath());
-            }
             else
             {
                 QList<QString> list;
@@ -101,6 +99,7 @@ void DialogFindDupes::on_btnDelete_clicked()
            if(item->child(ccounter)->checkState(0))
            {
                 QFile file(item->child(ccounter)->data(0, 0).toString());
+
                 if(file.exists()) file.remove();
            }
        }

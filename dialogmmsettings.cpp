@@ -97,15 +97,3 @@ void DialogMMSettings::on_btnDirToMonitor_clicked()
 
 }
 
-void DialogMMSettings::on_buttonBox_accepted()
-{
-    MMSettings::getInstance()->setServer(ui->txtServer->text());
-    MMSettings::getInstance()->setDataBase(ui->txtDataBase->text());
-    MMSettings::getInstance()->setUser(ui->txtUser->text());
-    MMSettings::getInstance()->setPwd(ui->txtPwd->text());
-    MMSettings::getInstance()->setPreset(ui->cboxPreset->currentText());
-
-    MMSettings::getInstance()->saveSettings();
-    this->close();
-
-}

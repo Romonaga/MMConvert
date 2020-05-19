@@ -193,48 +193,6 @@ void DialogMovieCompare::on_btnMega_clicked()
     }
 }
 
-void DialogMovieCompare::on_pushButton_clicked()
-{
-    QString dir;
-    QFileDialog fileDialog;
-    MMConversionInfo mmInfo;
-
-
-    fileDialog.setFileMode(QFileDialog::Directory);
-    fileDialog.setOption(QFileDialog::ShowDirsOnly, true);
-
-    fileDialog.exec();
-    if(fileDialog.result() == QDialog::Accepted)
-    {
-        ui->listResults->clear();
-        dir = fileDialog.selectedFiles().at(0);
-        QDirIterator dirWalk(dir, QDir::NoFilter, QDirIterator::Subdirectories);
-        while(dirWalk.hasNext())
-        {
-            QString dirFile = dirWalk.next();
-            QFileInfo fileInfo(dirFile);
-            if( fileInfo.isFile() == false) continue;
-
-            qDebug() << fileInfo.completeBaseName();
-            mmInfo.setFileName(fileInfo.fileName());
-            mmInfo.setfilePath(fileInfo.path());
-            ffMpegInvoker::probeMM(&mmInfo);
-            if(mmInfo.container().contains("matroska"))
-            {
-                QFile(mmInfo.inFullFileName()).rename(fileInfo.path() + "/" + fileInfo.baseName() + ".mkv");
-                qDebug() << "h264" << mmInfo   .container();
-            }
-            else if(mmInfo.container().contains("avi") || mmInfo.container().contains("mp4"))
-            {
-                QFile(mmInfo.inFullFileName()).rename(fileInfo.path() + "/" + fileInfo.baseName() + ".avi");
-                qDebug() << "avi" << mmInfo   .container();
-            }
-
-
-        }
-
-    }
-}
 
 void DialogMovieCompare::on_btnMegaDL_clicked()
 {
@@ -294,18 +252,12 @@ void DialogMovieCompare::on_btnMegaDL_clicked()
                 {
                     isRip = (movieNameParts[movieNameParts.length() - 1] == "rip");
                     if(movieNameParts.length() == 3 )
-                    {
                         movieName.append(movieNameParts[0]);
-                        //movieName.append("-");
-                    }
                     else
                     {
                         int offset = ((isRip) ? movieNameParts.length() - 1 : 2) ;
                         for(int counter =  0; counter < (movieNameParts.length() - offset); counter++)
-                        {
                             movieName.append(movieNameParts[counter]);
-                            //movieName.append("-");
-                        }
                     }
 
                     movieName.replace("&","and");

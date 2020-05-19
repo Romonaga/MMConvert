@@ -27,7 +27,7 @@ private slots:
 
     void on_btnDirToMonitor_clicked();
 
-    void on_buttonBox_accepted();
+
 
 private:
     Ui::DialogMMSettings *ui;

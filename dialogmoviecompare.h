@@ -20,7 +20,7 @@ private slots:
 
     void on_btnMega_clicked();
 
-    void on_pushButton_clicked();
+   // void on_pushButton_clicked();
 
     void on_btnMegaDL_clicked();
 
