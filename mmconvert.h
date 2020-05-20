@@ -12,10 +12,7 @@
 #include "mmconversioninfo.h"
 #include "ffmpeginvoker.h"
 #include "mmdirwatcher.h"
-
-#include <QtMultimedia/QMediaPlayer>
-#include <QtMultimedia/QMediaPlaylist>
-#include <QtMultimediaWidgets/QVideoWidget>
+#include "dialogplayvideo.h"
 
 
 
@@ -56,6 +53,8 @@ private slots:
 
     void on_actionPlex_DB_Scan_triggered();
 
+    void on_actionPlay_triggered();
+
 public slots:
     void threadProcessUpdate(QString, MMConversionInfo *mmInfo);
     void processComplete(MMConversionInfo *mmInfo);
@@ -72,10 +71,7 @@ private:
     bool _convertRunning;
 
     //Experimaental crap
-    QMediaPlayer *_player;
-    QVideoWidget *_videoWidget;
-    QMediaPlaylist *_playlist;
-
+    DialogPlayVideo *_player;
 
 
 

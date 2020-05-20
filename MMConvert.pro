@@ -40,7 +40,8 @@ SOURCES += \
     dialogmmsettings.cpp \
     mmdirwatcher.cpp \
     plexmediatablemodel.cpp \
-    dialogplexdbscanner.cpp
+    dialogplexdbscanner.cpp \
+    dialogplayvideo.cpp
 
 HEADERS += \
         mmconvert.h \
@@ -58,7 +59,8 @@ HEADERS += \
     mmdirwatcher.h \
     plexmediatablemodel.h \
     dialogplexdbscanner.h \
-    mmconvertcommon.h
+    mmconvertcommon.h \
+    dialogplayvideo.h
 
 FORMS += \
         mmconvert.ui \
@@ -66,7 +68,8 @@ FORMS += \
     dialogimportmovies.ui \
     dialogmoviecompare.ui \
     dialogmmsettings.ui \
-    dialogplexdbscanner.ui
+    dialogplexdbscanner.ui \
+    dialogplayvideo.ui
 
 #libav support
 unix:!macx: LIBS += -lavformat

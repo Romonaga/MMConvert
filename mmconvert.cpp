@@ -24,9 +24,7 @@
 #include "mmsettings.h"
 #include "dialogmmsettings.h"
 #include "dialogplexdbscanner.h"
-
-
-
+#include "dialogplayvideo.h"
 
 
 MMConvert::MMConvert(QWidget *parent) :
@@ -56,12 +54,8 @@ MMConvert::MMConvert(QWidget *parent) :
     database.setHostName(MMSettings::getInstance()->getServer());
     database.open();
 
-    _player = new QMediaPlayer;
 
-    _playlist = new QMediaPlaylist(_player);
-
-    _videoWidget = new QVideoWidget;
-    _player->setVideoOutput(_videoWidget);
+    _player = new DialogPlayVideo(this);
 
     _mmConvertModel = new  TableModel(this, database);
     _mmConvertModel->setEditStrategy(QSqlTableModel::OnFieldChange);
@@ -487,3 +481,10 @@ void MMConvert::markUseCustom()
 
 }
 
+
+void MMConvert::on_actionPlay_triggered()
+{
+
+    _player->show();
+
+}

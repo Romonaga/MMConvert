@@ -128,6 +128,8 @@
     <addaction name="actionMM_Settings"/>
     <addaction name="separator"/>
     <addaction name="actionPlex_DB_Scan"/>
+    <addaction name="separator"/>
+    <addaction name="actionPlay"/>
    </widget>
    <addaction name="menuMMConvert"/>
   </widget>
@@ -163,6 +165,11 @@
   <action name="actionPlex_DB_Scan">
    <property name="text">
     <string>Plex DB Scan</string>
+   </property>
+  </action>
+  <action name="actionPlay">
+   <property name="text">
+    <string>Play</string>
    </property>
   </action>
  </widget>
