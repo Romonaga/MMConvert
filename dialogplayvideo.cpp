@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include <QVideoWidget>
+#include <QDebug>
 
 DialogPlayVideo::DialogPlayVideo(QWidget *parent) :
     QDialog(parent),
@@ -14,9 +15,6 @@ DialogPlayVideo::DialogPlayVideo(QWidget *parent) :
     ui->sliderPosition->setRange(0,0);
 
     mediaPlayer = new QMediaPlayer(this, QMediaPlayer::VideoSurface);
-
-
-
 
     m_errorLabel = new QLabel;
     m_errorLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
@@ -43,7 +41,7 @@ DialogPlayVideo::DialogPlayVideo(QWidget *parent) :
     connect(mediaPlayer, QOverload<QMediaPlayer::Error>::of(&QMediaPlayer::error),
            this, &DialogPlayVideo::handleError);
 
-
+showFullScreen();
 
 }
 
@@ -67,17 +65,13 @@ void DialogPlayVideo::mediaStateChanged(QMediaPlayer::State state)
 {
     switch(state)
     {
-    case QMediaPlayer::StoppedState:
-        setWindowState(Qt::WindowNoState);
-        break;
 
     case QMediaPlayer::PlayingState:
         ui->btnPlay->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-        setWindowState(Qt::WindowFullScreen);
         break;
-    default:
+
+    case QMediaPlayer::PausedState:
         ui->btnPlay->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-        setWindowState(Qt::WindowFullScreen);
         break;
     }
 
@@ -146,4 +140,15 @@ void DialogPlayVideo::closeEvent(QCloseEvent *event)
     {
         mediaPlayer->stop();
     }
+}
+
+//QEvent(ActivationChange, 0x7fffffffdde0)
+//QEvent(ActivationChange, 0x7fffffffd710)
+void DialogPlayVideo::changeEvent(QEvent * event)
+{
+        if(event->type() ==  QEvent::ActivationChange &&  this->isActiveWindow() == false)
+        {
+            mediaPlayer->pause();
+        }
+
 }

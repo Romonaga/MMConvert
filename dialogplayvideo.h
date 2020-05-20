@@ -44,6 +44,10 @@ private:
     // QWidget interface
 protected:
     void closeEvent(QCloseEvent *event);
+
+    // QWidget interface
+protected:
+    void changeEvent(QEvent *event);
 };
 
 #endif // DIALOGPLAYVIDEO_H
