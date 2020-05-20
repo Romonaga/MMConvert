@@ -485,6 +485,6 @@ void MMConvert::markUseCustom()
 void MMConvert::on_actionPlay_triggered()
 {
 
-    _player->show();
+    _player->showFullScreen();
 
 }
