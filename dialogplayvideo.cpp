@@ -41,8 +41,6 @@ DialogPlayVideo::DialogPlayVideo(QWidget *parent) :
     connect(mediaPlayer, QOverload<QMediaPlayer::Error>::of(&QMediaPlayer::error),
            this, &DialogPlayVideo::handleError);
 
-showFullScreen();
-
 }
 
 DialogPlayVideo::~DialogPlayVideo()
@@ -75,7 +73,6 @@ void DialogPlayVideo::mediaStateChanged(QMediaPlayer::State state)
         break;
     }
 
-    update();
 }
 
 void DialogPlayVideo::positionChanged(qint64 position)
@@ -136,14 +133,9 @@ void DialogPlayVideo::on_sliderPosition_sliderMoved(int position)
 
 void DialogPlayVideo::closeEvent(QCloseEvent *event)
 {
-    if(event->Close)
-    {
-        mediaPlayer->stop();
-    }
+    mediaPlayer->stop();
 }
 
-//QEvent(ActivationChange, 0x7fffffffdde0)
-//QEvent(ActivationChange, 0x7fffffffd710)
 void DialogPlayVideo::changeEvent(QEvent * event)
 {
         if(event->type() ==  QEvent::ActivationChange &&  this->isActiveWindow() == false)
